@@ -73,17 +73,29 @@ Resources:
           cd /root/
           curl -O https://bootstrap.pypa.io/get-pip.py
           python3 get-pip.py
-          git clone https://github.com/eloyvega/bootcamp-devops.git
-          cd ~/bootcamp-devops/backend/
+          cd ~
+          git clone https://github.com/mike09d/bootcamp-module-devops.git
+          cd ~/bootcamp-module-devops/backend/
           pip install -r requirements.txt
-          nohup gunicorn -w 3 -b 0.0.0.0:8000 app:app &
+          nohup gunicorn -w 3 -b 0.0.0.0:8000 app-v2:app &
           /opt/aws/bin/cfn-signal -e 0 --region ${AWS::Region} --stack ${AWS::StackName} --resource AutoScalingGroup
   AutoScalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
     # CreationPolicy:
+    CreationPolicy:
+      ResourceSignal:    
+        Count: 2
+        Timeout: PT5M
+    UpdatePolicy:
+      AutoScalingScheduledAction:
+        IgnoreUnmodifiedGroupSizeProperties: 'true'
+      AutoScalingRollingUpdate:
+        MinInstancesInService: '1' 
+        MaxBatchSize: '2' #Saber cuantas instancias maximo actualiza
+        PauseTime: PT5M
+        WaitOnResourceSignals: 'true'
 
     # UpdatePolicy:
-
     Properties:
       AvailabilityZones: !GetAZs
       LaunchConfigurationName: !Ref LaunchConfiguration
