@@ -44,8 +44,22 @@ Resources:
       SecurityGroups:
         - !GetAtt LoadBalancerSG.GroupId
       AvailabilityZones: !GetAZs
-      # Listeners
-      # HealthCheck
+      
+  # Listeners
+    Listeners:
+    - InstancePort: 8000
+      InstanceProtocol: tcp
+      LoadBalancerPort: 80
+      Protocol: tcp
+
+  # HealthCheck
+    HealthCheck:  
+      HealthyThreshold: 2 #pings exitosos para que la maquina sea saludable
+      Interval: 30 #tiempo de hacer pings
+      Target: "TCP:8000"
+      Timeout: 5
+      UnhealthyThreshold: 5 #ping para saber si la maquina no responde
+      
   LaunchConfiguration:
     Type: AWS::AutoScaling::LaunchConfiguration
     Properties:
