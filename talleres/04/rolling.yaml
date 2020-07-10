@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description: API de Mythical Mysfits con Auto Scaling Groups.
+Description: Rolling deployment del API de Mythical Mysfits
 
 Mappings:
   RegionMap:
@@ -11,44 +11,30 @@ Mappings:
       "AmiId": "ami-0e34e7b9ca0ace12d"
 
 Resources:
-<<<<<<< HEAD
-
-=======
->>>>>>> upstream/master
   LoadBalancerSG:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupName: MythicalMysfitsLB
       GroupDescription: Load Balancer
-<<<<<<< HEAD
       SecurityGroupIngress:
         - CidrIp: 0.0.0.0/0
           FromPort: 80
           ToPort: 80
           IpProtocol: tcp
-          
-=======
-      # Ingress rules
->>>>>>> upstream/master
   InstanceSG:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupName: MythicalMysfitsInstance
       GroupDescription: Instances
-<<<<<<< HEAD
       SecurityGroupIngress:
-        - CidrIp: 0.0.0.0/0
-          FromPort: 22
-          ToPort: 22
-          IpProtocol: tcp
         - SourceSecurityGroupId: !GetAtt LoadBalancerSG.GroupId
           FromPort: 8000
           ToPort: 8000
           IpProtocol: tcp
-          
-=======
-      # Ingress rules
->>>>>>> upstream/master
+        - CidrIp: 0.0.0.0/0
+          FromPort: 22
+          ToPort: 22
+          IpProtocol: tcp
   LoadBalancer:
     Type: AWS::ElasticLoadBalancing::LoadBalancer
     Properties:
@@ -56,23 +42,17 @@ Resources:
       SecurityGroups:
         - !GetAtt LoadBalancerSG.GroupId
       AvailabilityZones: !GetAZs
-<<<<<<< HEAD
       Listeners:
-      - InstancePort: 8000
-        InstanceProtocol: TCP
-        LoadBalancerPort: 80
-        Protocol: TCP
+        - LoadBalancerPort: 80
+          InstancePort: 8000
+          Protocol: TCP
+          InstanceProtocol: TCP
       HealthCheck:
+        Target: HTTP:8000/
         HealthyThreshold: 2
         Interval: 30
-        Target: "TCP:8000"
-        Timeout: 5
+        Timeout: 10
         UnhealthyThreshold: 5
-
-=======
-      # Listeners
-      # HealthCheck
->>>>>>> upstream/master
   LaunchConfiguration:
     Type: AWS::AutoScaling::LaunchConfiguration
     Properties:
@@ -84,36 +64,40 @@ Resources:
       KeyName: mythical-mysfits
       SecurityGroups:
         - !GetAtt InstanceSG.GroupId
-<<<<<<< HEAD
-      UserData: 
-        Fn::Base64: |
+      UserData:
+        Fn::Base64: !Sub |
           #!/bin/bash -xe
-          exec > >(tee /var/log/cloud-init-output.log|logger -t user-data -s 2>/dev/console) 2>&1
-          cd /home/ec2-user
-          sudo yum install -y python37
+          exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
+          yum update -y
+          yum install -y git python37
+          cd /root/
           curl -O https://bootstrap.pypa.io/get-pip.py
           python3 get-pip.py
-          sudo yum install git -y
-          git clone https://github.com/mike09d/bootcamp-module-devops.git
-          cd bootcamp-module-devops/backend/
+          git clone https://github.com/eloyvega/bootcamp-devops.git
+          cd ~/bootcamp-devops/backend/
           pip install -r requirements.txt
           nohup gunicorn -w 3 -b 0.0.0.0:8000 app:app &
-      
+          /opt/aws/bin/cfn-signal -e 0 --region ${AWS::Region} --stack ${AWS::StackName} --resource AutoScalingGroup
   AutoScalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
+    # CreationPolicy:
+
+    # UpdatePolicy:
+
     Properties:
       AvailabilityZones: !GetAZs
-      DesiredCapacity: 1
       LaunchConfigurationName: !Ref LaunchConfiguration
+      DesiredCapacity: 2
+      MaxSize: 3
+      MinSize: 1
       LoadBalancerNames:
         - !Ref LoadBalancer
-      MaxSize: 2
-      MinSize: 1
       Tags:
         - Key: Name
+          Value: MythicalMysfitsAPI
           PropagateAtLaunch: True
-          Value: Mysfits
-=======
-      # UserData
-  # AutoScalingGroup:
->>>>>>> upstream/master
+
+Outputs:
+  LoadBalancerDNS:
+    Description: DNS del Load Balancer
+    Value: !GetAtt LoadBalancer.DNSName

@@ -12,4 +12,12 @@ Desplegando la API de Mythical Mysfits usando Auto Scaling Groups
 
 ## [Taler 3](./03/README.md)
 
+<<<<<<< HEAD
 Desplegando la API usando CloudFormation y Auto Scaling Groups
+=======
+Desplegando la API usando CloudFormation y Auto Scaling Groups
+
+## [Taler 4](./04/README.md)
+
+Rolling Update de ASG usando CloudFormation.
+>>>>>>> upstream/master
