@@ -2,14 +2,15 @@
 
 A lo largo del curso, evolucionaremos la forma de desplegar la aplicación ocupando diferentes servicios de AWS:
 
-## [Taller 1](./01/README.md)
+1. [Taller 1](./01/README.md): Desplegando Mythical Mysfits en un servidor EC2
 
-Desplegando Mythical Mysfits en un servidor EC2
+2. [Taller 2](./02/README.md): Desplegando la API de Mythical Mysfits usando Auto Scaling Groups
 
-## [Taler 2](./02/README.md)
+3. [Taller 3](./03/README.md): Desplegando la API usando CloudFormation y Auto Scaling Groups
 
-Desplegando la API de Mythical Mysfits usando Auto Scaling Groups
+4. [Taller 4](./04/README.md): Rolling Update de ASG usando CloudFormation
 
+<<<<<<< HEAD
 ## [Taler 3](./03/README.md)
 
 <<<<<<< HEAD
@@ -20,4 +21,7 @@ Desplegando la API usando CloudFormation y Auto Scaling Groups
 ## [Taler 4](./04/README.md)
 
 Rolling Update de ASG usando CloudFormation.
+>>>>>>> upstream/master
+=======
+5. [Taller 5](./05/README.md): Blue/Green deployments con CloudFormation y Auto Scaling Groups
 >>>>>>> upstream/master
