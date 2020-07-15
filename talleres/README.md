@@ -24,4 +24,9 @@ Rolling Update de ASG usando CloudFormation.
 >>>>>>> upstream/master
 =======
 5. [Taller 5](./05/README.md): Blue/Green deployments con CloudFormation y Auto Scaling Groups
+<<<<<<< HEAD
+>>>>>>> upstream/master
+=======
+
+6. [Taller 6](./06/README.md): Introducción a CodeBuild
 >>>>>>> upstream/master
