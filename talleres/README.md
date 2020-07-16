@@ -29,4 +29,9 @@ Rolling Update de ASG usando CloudFormation.
 =======
 
 6. [Taller 6](./06/README.md): Introducción a CodeBuild
+<<<<<<< HEAD
+>>>>>>> upstream/master
+=======
+
+7. [Taller 7](./07/README.md): Introducción a CodePipeline
 >>>>>>> upstream/master
