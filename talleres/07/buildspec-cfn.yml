@@ -6,6 +6,6 @@ phases:
       - aws cloudformation validate-template --template-body file://talleres/07/api-cfn-pipeline.yaml
 
 artifacts:
- discard-paths: yes
- files:
-  - talleres/07/api-cfn-pipeline.yaml
+  discard-paths: yes
+  files:
+    - talleres/07/api-cfn-pipeline.yaml
