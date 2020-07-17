@@ -10,28 +10,12 @@ A lo largo del curso, evolucionaremos la forma de desplegar la aplicación ocupa
 
 4. [Taller 4](./04/README.md): Rolling Update de ASG usando CloudFormation
 
-<<<<<<< HEAD
-## [Taler 3](./03/README.md)
-
-<<<<<<< HEAD
-Desplegando la API usando CloudFormation y Auto Scaling Groups
-=======
-Desplegando la API usando CloudFormation y Auto Scaling Groups
-
-## [Taler 4](./04/README.md)
-
-Rolling Update de ASG usando CloudFormation.
->>>>>>> upstream/master
-=======
 5. [Taller 5](./05/README.md): Blue/Green deployments con CloudFormation y Auto Scaling Groups
-<<<<<<< HEAD
->>>>>>> upstream/master
-=======
 
 6. [Taller 6](./06/README.md): Introducción a CodeBuild
-<<<<<<< HEAD
->>>>>>> upstream/master
-=======
 
 7. [Taller 7](./07/README.md): Introducción a CodePipeline
->>>>>>> upstream/master
+
+8. [Taller 8](./08/README.md): Introducción a CodeDeploy
+
+9. [Taller 9](./09/README.md): CI/CD
