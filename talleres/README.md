@@ -22,6 +22,7 @@ A lo largo del curso, evolucionaremos la forma de desplegar la aplicación ocupa
 
 10. [Taller 10](./10/README.md): VPC Peering
 
+<<<<<<< HEAD
 Bootcamp DevOps
 Este ejercicio está basado en la aplicación del workshop Mythical Mysfits de AWS.
 
@@ -41,3 +42,6 @@ git fetch upstream
 git checkout master
 git merge upstream/master
 git push origin master
+=======
+11. [Taller 11](./11/README.md): Introducción a Docker
+>>>>>>> upstream/master
