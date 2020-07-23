@@ -50,4 +50,9 @@ git push origin master
 11. [Taller 11](./11/README.md): Introducción a Docker
 
 12. [Taller 12](./12/README.md): Introducción a ECS
+<<<<<<< HEAD
+>>>>>>> upstream/master
+=======
+
+13. [Taller 13](./13/README.md): CI/CD con ECS
 >>>>>>> upstream/master
