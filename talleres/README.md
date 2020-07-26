@@ -27,3 +27,5 @@ A lo largo del curso, evolucionaremos la forma de desplegar la aplicación ocupa
 12. [Taller 12](./12/README.md): Introducción a ECS
 
 13. [Taller 13](./13/README.md): CI/CD con ECS
+
+14. [Taller 14](./14/README.md): Alarmas y métricas de CloudWatch
